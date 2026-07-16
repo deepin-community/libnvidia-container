@@ -33,4 +33,8 @@ commit_build:
         project: deepin:Develop:main
         package: %{SCM_REPOSITORY_NAME}
   filters:
+<<<<<<< HEAD
     event: push
+=======
+    event: push
+>>>>>>> e835c15 (init libnvidia-container-1.19.0)
