@@ -1,3 +1,9 @@
+libnvidia-container (1.19.0-1deepin2) unstable; urgency=medium
+
+  * add build-dep golang-go
+
+ -- lichenggang <lichenggang@deepin.org>  Thu, 16 Jul 2026 15:42:29 +0800
+
 libnvidia-container (1.19.0-1deepin1) unstable; urgency=medium
   * Port to Deepin packaging:
     - Replace template variables (@MAJOR@, @SECTION@, @VERSION_TAG@,
