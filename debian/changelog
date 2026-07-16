@@ -1,3 +1,15 @@
+libnvidia-container (1.19.0-1deepin3) unstable; urgency=medium
+
+  * Fix PKG_VERSION extraction with deepin version suffix
+    - Update sed regex in debian/rules to remove full epoch-version suffix
+    - Previous regex 's/-[0-9]\+$$//' fails on deepin version numbers
+      like '1.19.0-1deepin2' where the suffix contains non-digit chars
+    - New regex 's/-[^-]*$$//' correctly strips the last dash and any suffix
+    - Fixes build error: "invalid suffix "deepin2" on integer constant"
+      in src/nvc.h generated from template
+
+ -- lichenggang <lichenggang@deepin.org>  Thu, 16 Jul 2026 15:50:27 +0800
+
 libnvidia-container (1.19.0-1deepin2) unstable; urgency=medium
 
   * add build-dep golang-go
