@@ -1,0 +1,8 @@
+nvidia-container-cli
+src/nvc.h
+src/nvc_rpc.h
+src/nvc_xdr.c
+src/nvc_svc.c
+src/nvc_clt.c
+libnvidia-container.a
+libnvidia-container.so*

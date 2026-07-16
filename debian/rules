@@ -1,4 +1,42 @@
 #!/usr/bin/make -f
+#export DH_VERBOSE = 1
+
+include /usr/share/dpkg/architecture.mk
+include /usr/share/dpkg/buildflags.mk
+
+PKG_VERSION := $(shell dpkg-parsechangelog --show-field=Version | sed 's/-[0-9]\+$$//')
+
+export LIB_VERSION = $(PKG_VERSION)
+export GO111MODULE = on
+export GOPATH =
+
+# Use system paths matching multiarch .install files
+export prefix = /usr
+export libdir = /usr/lib/$(DEB_HOST_MULTIARCH)
+
+# Disable vendored elftoolchain build -- bmake not available on Debian;
+# libelf from elfutils is used instead when WITH_LIBELF=yes
+export WITH_LIBELF = yes
+
+# Use system libtirpc-dev instead of downloading+static-linking from source
+export CPPFLAGS = -isystem /usr/include/tirpc -DWITH_TIRPC
+export LDLIBS = -ltirpc -lpthread
+
+override_dh_auto_clean:
+	dh_auto_clean -- mostlyclean
+
+override_dh_auto_build:
+	dh_auto_build -- prefix=/usr libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_auto_install:
+	dh_auto_install -- prefix=/usr libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_fixperms:
+	dh_fixperms -X libnvidia-container.so.$(PKG_VERSION)
+
+override_dh_installchangelogs:
+	rm -f CHANGELOG.md
+	dh_installchangelogs
 
 %:
 	dh $@
