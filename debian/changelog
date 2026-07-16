@@ -1,3 +1,26 @@
+libnvidia-container (1.19.0-1deepin1) unstable; urgency=medium
+  * Port to Deepin packaging:
+    - Replace template variables (@MAJOR@, @SECTION@, @VERSION_TAG@,
+      @DEB_HOST_MULTIARCH@, @VERSION@) with hardcoded constants
+    - Rename debian/*.install, .lintian-overrides, .symbols files
+      with expanded template names
+    - Add debian/source/format, debian/source/options, debian/gbp.conf,
+      debian/deepin/OWNERS, debian/deepin/workflows.yml
+  * Fix non-git build failure:
+    - Export LIB_VERSION from dpkg-parsechangelog to bypass git tag
+      version inference in versions.mk
+    - Add 2>/dev/null || echo "unknown" fallback to REVISION in mk/common.mk
+    - Override dh_auto_clean to use mostlyclean instead of distclean
+  * Use system libtirpc-dev for RPC headers instead of vendored source
+  * Use system libelf-dev (elfutils) instead of vendored elftoolchain
+  * Vendor nvidia-modprobe-550.54.14 source tarball in debian/vendor/
+    to avoid network download during build
+  * Export GO111MODULE=on and unset GOPATH for nvcgo Go module build
+  * Add -mod=vendor flag for offline Go dependency resolution
+  * Set prefix=/usr, libdir=/usr/lib/$(DEB_HOST_MULTIARCH) for
+    multiarch-compatible installation paths
+ -- lichenggang <lichenggang@deepin.org>  Thu, 16 Jul 2026 15:23:00 +0800
+
 libnvidia-container (1.19.0-1) unstable; urgency=medium
 
   * Bump version to 1.19.0

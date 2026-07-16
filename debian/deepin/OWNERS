@@ -13,4 +13,8 @@ approvers:
 - UTsweetyfish
 - hudeng-go
 - zccrs
+<<<<<<< HEAD
 - deepin-community/deepin-sysdev-team
+=======
+- deepin-community/deepin-sysdev-team
+>>>>>>> e835c15 (init libnvidia-container-1.19.0)
