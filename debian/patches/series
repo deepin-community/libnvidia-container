@@ -1,3 +1,2 @@
-skip-git-dir.patch
 go-build-for-offline-dependency-resolution
 Added-vendored-tarball-fallback-path-
