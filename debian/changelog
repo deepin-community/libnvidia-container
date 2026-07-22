@@ -1,3 +1,12 @@
+libnvidia-container (1.19.0-1deepin4) unstable; urgency=medium
+
+  * Remove reversed skip-git-dir.patch from series
+    - The skip-git-dir.patch is already applied in the upstream orig
+      tarball, causing dpkg-source to fail with 'Reversed (or previously
+      applied) patch detected'
+
+ -- lichenggang <lichenggang@uniontech.com>  Wed, 22 Jul 2026 22:20:00 +0800
+
 libnvidia-container (1.19.0-1deepin3) unstable; urgency=medium
 
   * Fix PKG_VERSION extraction with deepin version suffix
