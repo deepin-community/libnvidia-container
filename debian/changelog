@@ -1,3 +1,22 @@
+libnvidia-container (1.19.0-1deepin5) unstable; urgency=medium
+
+  * Regenerate orig tarball from clean unpatched source
+    - The orig tarball was generated from a source tree with quilt patches
+      already applied, and included .git/, .pc/, and debian/ directories
+    - dpkg-source failed with 'Reversed (or previously applied) patch
+      detected' because patches were already present in the source
+    - Remove .pc/ from git tracking and add to .gitignore
+    - Revert source files to unpatched upstream state so patches apply
+      cleanly during package build
+  * Restore skip-git-dir.patch removed in 1deepin4
+    - The patch was removed because the dirty orig tarball already contained
+      the patched code; now that the tarball is clean, the patch is needed
+      again for build environments without git installed
+    - Makes REVISION fall back to 'unknown' when git rev-parse fails,
+      preventing 'Invalid commit hash' build errors
+
+ -- lichenggang <lichenggang@uniontech.com>  Thu, 23 Jul 2026 10:15:00 +0800
+
 libnvidia-container (1.19.0-1deepin4) unstable; urgency=medium
 
   * Remove reversed skip-git-dir.patch from series
