@@ -21,3 +21,4 @@ src/nvcgo/libnvidia-container-go.h
 
 /dist
 /.vscode
+.pc/
