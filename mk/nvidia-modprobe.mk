@@ -10,8 +10,6 @@ VERSION        := 550.54.14
 PREFIX         := nvidia-modprobe-$(VERSION)
 URL            := https://github.com/NVIDIA/nvidia-modprobe/archive/$(VERSION).tar.gz
 
-VENDOR_DIR     ?= $(CURDIR)/debian/vendor/nvidia-modprobe
-VENDOR_TAR     := $(VENDOR_DIR)/nvidia-modprobe-$(VERSION).tar.gz
 SRCS_DIR       := $(DEPS_DIR)/src/$(PREFIX)
 MODPROBE_UTILS := $(SRCS_DIR)/modprobe-utils
 
@@ -35,15 +33,9 @@ LIB_OBJS := $(LIB_SRCS:.c=.o)
 
 $(SRCS_DIR)/.download_stamp:
 	$(MKDIR) -p $(SRCS_DIR)
-	if [ -f "$(VENDOR_TAR)" ]; then \
-		$(TAR) -C $(SRCS_DIR) --strip-components=1 -xz \
-			-f $(VENDOR_TAR) $(PREFIX)/modprobe-utils; \
-		$(PATCH) -d $(SRCS_DIR) -p1 < $(PATCH_FILE); \
-	else \
-		$(CURL) --progress-bar -fSL $(URL) | \
-		$(TAR) -C $(SRCS_DIR) --strip-components=1 -xz $(PREFIX)/modprobe-utils; \
-		$(PATCH) -d $(SRCS_DIR) -p1 < $(PATCH_FILE); \
-	fi
+	$(CURL) --progress-bar -fSL $(URL) | \
+	$(TAR) -C $(SRCS_DIR) --strip-components=1 -xz $(PREFIX)/modprobe-utils
+	$(PATCH) -d $(SRCS_DIR) -p1 < $(PATCH_FILE)
 	@touch $@
 
 $(LIB_SRCS): $(SRCS_DIR)/.download_stamp
